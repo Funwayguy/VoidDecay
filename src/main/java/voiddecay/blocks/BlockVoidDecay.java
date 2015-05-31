@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
@@ -48,7 +49,7 @@ public class BlockVoidDecay extends Block
     		return;
     	}
     	
-    	if(updates >= 10 || rand.nextInt(100) >= VD_Settings.decaySpeed)
+    	if(updates >= MathHelper.ceiling_float_int(VD_Settings.decayCap/2F) || rand.nextInt(100) >= VD_Settings.decaySpeed)
     	{
     		return;
     	} else
@@ -63,7 +64,7 @@ public class BlockVoidDecay extends Block
     	if(below.getMaterial() != Material.air && below != this)
     	{
     		world.setBlock(x, y - 1, z, this, 0, 2);
-    		world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "portal.portal", 0.25F, 2.5F);
+    		world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "portal.portal", 0.25F, 1.8F + (rand.nextFloat()*0.2F));
     		return;
     	} else
     	{
@@ -83,10 +84,10 @@ public class BlockVoidDecay extends Block
 		    	if(block.getMaterial() != Material.air && block != this)
 		    	{
 		    		world.setBlock(i, j, k, this, 0, 2);
-		    		world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "portal.portal", 0.25F, 2.5F);
 		    	}
 	    	}
 	    	
+    		world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "portal.portal", 0.25F, 1.8F + (rand.nextFloat()*0.2F));
 	    	world.setBlock(x, y, z, Blocks.air, 0, 2);
     	}
     }

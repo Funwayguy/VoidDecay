@@ -5,7 +5,7 @@ package voiddecay.core;
  */
 public class VD_Settings
 {
-	public static boolean hideUpdates = false;
-	public static int decaySpeed = 5;
-	public static int infectedChunks = 1;
+	public static int decaySpeed = 100;
+	public static int infectedChunks = 100;
+	public static int decayCap = 20;
 }
