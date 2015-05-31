@@ -1,0 +1,16 @@
+[
+{
+  "modid": "voiddecay",
+  "name": "VoidDecay",
+  "description": "Slowly eats away at ones world with devastating effects",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Funwayguy"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
