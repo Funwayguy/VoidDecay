@@ -22,7 +22,7 @@ group= "voiddecay" // http://maven.apache.org/guides/mini/guide-naming-conventio
 archivesBaseName = "VoidDecay"
 
 minecraft {
-    version = "1.7.10-10.13.2.1230"
+    version = "1.7.10-10.13.2.1291"
 }
 
 dependencies {
