@@ -1,2 +1,3 @@
-tile.void_decay.tnt.name=Void TNT
+tile.void_decay.void_tnt.name=Void TNT
+tile.void_decay.cleanse_tnt.name=Cleanse TNT
 tile.void_decay.decay.name=Void Decay

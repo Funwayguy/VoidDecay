@@ -6,9 +6,12 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
+import voiddecay.blocks.BlockCleanseTNT;
 import voiddecay.blocks.BlockVoidDecay;
 import voiddecay.blocks.BlockVoidTNT;
+import voiddecay.blocks.EntityCleanseTNT;
 import voiddecay.blocks.EntityVoidTNT;
+import voiddecay.blocks.RenderCleanseTNT;
 import voiddecay.blocks.RenderVoidTNT;
 import voiddecay.core.proxies.CommonProxy;
 import voiddecay.handlers.ConfigHandler;
@@ -44,6 +47,7 @@ public class VoidDecay
 	
 	public static Block decay;
 	public static Block voidTNT;
+	public static Block cleanseTNT;
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -61,16 +65,25 @@ public class VoidDecay
     {
     	decay = new BlockVoidDecay();
     	voidTNT = new BlockVoidTNT();
+    	cleanseTNT = new BlockCleanseTNT();
     	GameRegistry.registerBlock(decay, "void_decay");
     	GameRegistry.registerBlock(voidTNT, "void_tnt");
+    	GameRegistry.registerBlock(cleanseTNT, "cleanse_tnt");
     	
     	GameRegistry.addShapedRecipe(new ItemStack(voidTNT), "TST", "SNS", "TST", 'T', new ItemStack(Blocks.tnt), 'S', new ItemStack(Items.skull, 1, 1), 'N', new ItemStack(Items.nether_star));
+    	GameRegistry.addShapedRecipe(new ItemStack(cleanseTNT), "TST", "SNS", "TST", 'T', new ItemStack(Blocks.tnt), 'S', new ItemStack(Items.potionitem, 1, 8229), 'N', new ItemStack(Items.nether_star));
     	
+    	int vTntID = EntityRegistry.findGlobalUniqueEntityId();
+    	EntityRegistry.registerGlobalEntityID(EntityVoidTNT.class, "void_tnt", vTntID);
     	EntityRegistry.registerModEntity(EntityVoidTNT.class, "void_tnt", EntityRegistry.findGlobalUniqueEntityId(), this, 64, 10, true);
+    	int cTntID = EntityRegistry.findGlobalUniqueEntityId();
+    	EntityRegistry.registerGlobalEntityID(EntityCleanseTNT.class, "cleanse_tnt", cTntID);
+    	EntityRegistry.registerModEntity(EntityCleanseTNT.class, "cleanse_tnt", EntityRegistry.findGlobalUniqueEntityId(), this, 64, 10, true);
     	
     	if(proxy.isClient())
     	{
     		RenderingRegistry.registerEntityRenderingHandler(EntityVoidTNT.class, new RenderVoidTNT());
+    		RenderingRegistry.registerEntityRenderingHandler(EntityCleanseTNT.class, new RenderCleanseTNT());
     	}
     }
     

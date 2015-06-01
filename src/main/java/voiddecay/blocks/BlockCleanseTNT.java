@@ -13,20 +13,20 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockVoidTNT extends Block
+public class BlockCleanseTNT extends Block
 {
-	public BlockVoidTNT()
+	public BlockCleanseTNT()
 	{
 		super(Material.tnt);
 		this.setBlockTextureName("portal");
-		this.setBlockName("void_decay.void_tnt");
+		this.setBlockName("void_decay.cleanse_tnt");
 		this.setCreativeTab(CreativeTabs.tabRedstone);
 	}
 
     @SideOnly(Side.CLIENT)
     public int getBlockColor()
     {
-        return Color.RED.getRGB();
+        return Color.BLUE.getRGB();
     }
 
     /**
@@ -35,7 +35,7 @@ public class BlockVoidTNT extends Block
     @SideOnly(Side.CLIENT)
     public int getRenderColor(int p_149741_1_)
     {
-        return Color.RED.getRGB();
+        return Color.BLUE.getRGB();
     }
 
     /**
@@ -45,7 +45,7 @@ public class BlockVoidTNT extends Block
     @SideOnly(Side.CLIENT)
     public int colorMultiplier(IBlockAccess p_149720_1_, int p_149720_2_, int p_149720_3_, int p_149720_4_)
     {
-        return Color.RED.getRGB();
+        return Color.BLUE.getRGB();
     }
 
     /**
@@ -100,7 +100,7 @@ public class BlockVoidTNT extends Block
     {
         if (!world.isRemote)
         {
-        	EntityVoidTNT entitytntprimed = new EntityVoidTNT(world, (double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), explosion.getExplosivePlacedBy());
+        	EntityCleanseTNT entitytntprimed = new EntityCleanseTNT(world, (double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), explosion.getExplosivePlacedBy());
             entitytntprimed.fuse = world.rand.nextInt(entitytntprimed.fuse / 4) + entitytntprimed.fuse / 8;
             world.spawnEntityInWorld(entitytntprimed);
         }
@@ -110,7 +110,7 @@ public class BlockVoidTNT extends Block
     {
         if (!world.isRemote)
         {
-        	EntityVoidTNT entitytntprimed = new EntityVoidTNT(world, (double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), entityLiving);
+        	EntityCleanseTNT entitytntprimed = new EntityCleanseTNT(world, (double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), entityLiving);
             world.spawnEntityInWorld(entitytntprimed);
             world.playSoundAtEntity(entitytntprimed, "game.tnt.primed", 1.0F, 1.0F);
         }

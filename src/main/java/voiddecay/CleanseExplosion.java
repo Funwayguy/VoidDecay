@@ -7,13 +7,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
@@ -21,7 +22,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import voiddecay.core.VoidDecay;
 
-public class VoidExplosion extends Explosion
+public class CleanseExplosion extends Explosion
 {
     private int field_77289_h = 16;
     private World worldObj;
@@ -29,9 +30,9 @@ public class VoidExplosion extends Explosion
     public List<ChunkPosition> affectedBlockPositions = new ArrayList<ChunkPosition>();
     private Map<Entity, Vec3> field_77288_k = new HashMap<Entity, Vec3>();
     
-    public static VoidExplosion newExplosion(World world, Entity entity, double x, double y, double z, float size)
+    public static CleanseExplosion newExplosion(World world, Entity entity, double x, double y, double z, float size)
     {
-        VoidExplosion explosion = new VoidExplosion(world, entity, x, y, z, size);
+        CleanseExplosion explosion = new CleanseExplosion(world, entity, x, y, z, size);
         explosion.isFlaming = true;
         explosion.isSmoking = true;
         if (net.minecraftforge.event.ForgeEventFactory.onExplosionStart(world, explosion)) return explosion;
@@ -40,7 +41,7 @@ public class VoidExplosion extends Explosion
         return explosion;
     }
 
-    public VoidExplosion(World world, Entity entity, double x, double y, double z, float size)
+    public CleanseExplosion(World world, Entity entity, double x, double y, double z, float size)
     {
     	super(world, entity, x, y, z, size);
         this.worldObj = world;
@@ -92,10 +93,9 @@ public class VoidExplosion extends Explosion
                             int l1 = MathHelper.floor_double(d7);
                             Block block = this.worldObj.getBlock(j1, k1, l1);
 
-                            if (block.getMaterial() != Material.air)
+                            if (block == VoidDecay.decay)
                             {
-                                float f3 = 0;//this.exploder != null ? this.exploder.func_145772_a(this, this.worldObj, j1, k1, l1, block) : block.getExplosionResistance(this.exploder, worldObj, j1, k1, l1, explosionX, explosionY, explosionZ);
-                                f1 -= (f3 + 0.3F) * f2;
+                                f1 -= 0.3F * f2;
                             }
 
                             if (f1 > 0.0F && (this.exploder == null || this.exploder.func_145774_a(this, this.worldObj, j1, k1, l1, block, f1)))
@@ -144,7 +144,10 @@ public class VoidExplosion extends Explosion
                     d7 /= d9;
                     double d10 = (double)this.worldObj.getBlockDensity(vec3, entity.boundingBox);
                     double d11 = (1.0D - d4) * d10;
-                    entity.attackEntityFrom(DamageSource.setExplosionSource(this), (float)((int)((d11 * d11 + d11) / 2.0D * 8.0D * (double)this.explosionSize + 1.0D)));
+                    if(entity instanceof EntityLivingBase)
+                    {
+                    	((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 120, 1));
+                    }
                     double d8 = EnchantmentProtection.func_92092_a(entity, d11);
                     entity.motionX += d5 * d8;
                     entity.motionY += d6 * d8;
@@ -190,9 +193,9 @@ public class VoidExplosion extends Explosion
             k = chunkposition.chunkPosZ;
             block = this.worldObj.getBlock(i, j, k);
 
-            if (block.getMaterial() != Material.air)
+            if (block == VoidDecay.decay)
             {
-                this.worldObj.setBlock(i, j, k, VoidDecay.decay, 0, 2);
+                this.worldObj.setBlock(i, j, k, Blocks.air, 0, 2);
             }
         }
     }
