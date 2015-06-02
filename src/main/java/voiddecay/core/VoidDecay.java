@@ -75,10 +75,10 @@ public class VoidDecay
     	
     	int vTntID = EntityRegistry.findGlobalUniqueEntityId();
     	EntityRegistry.registerGlobalEntityID(EntityVoidTNT.class, "void_tnt", vTntID);
-    	EntityRegistry.registerModEntity(EntityVoidTNT.class, "void_tnt", EntityRegistry.findGlobalUniqueEntityId(), this, 64, 10, true);
+    	EntityRegistry.registerModEntity(EntityVoidTNT.class, "void_tnt", vTntID, this, 64, 10, true);
     	int cTntID = EntityRegistry.findGlobalUniqueEntityId();
     	EntityRegistry.registerGlobalEntityID(EntityCleanseTNT.class, "cleanse_tnt", cTntID);
-    	EntityRegistry.registerModEntity(EntityCleanseTNT.class, "cleanse_tnt", EntityRegistry.findGlobalUniqueEntityId(), this, 64, 10, true);
+    	EntityRegistry.registerModEntity(EntityCleanseTNT.class, "cleanse_tnt", cTntID, this, 64, 10, true);
     	
     	if(proxy.isClient())
     	{

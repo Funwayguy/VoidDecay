@@ -37,6 +37,10 @@ public class BlockVoidDecay extends Block
      */
     public void onBlockAdded(World world, int x, int y, int z)
     {
+    	if(VD_Settings.fastDecay)
+    	{
+    		world.scheduleBlockUpdate(x, y, z, this, 20);
+    	}
     }
 	
     /**
@@ -65,6 +69,10 @@ public class BlockVoidDecay extends Block
     	{
     		world.setBlock(x, y - 1, z, this, 0, 2);
     		world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "portal.portal", 0.25F, 1.8F + (rand.nextFloat()*0.2F));
+    		if(VD_Settings.fastDecay)
+    		{
+    			world.scheduleBlockUpdate(x, y, z, this, 20);
+    		}
     		return;
     	} else
     	{
@@ -73,11 +81,6 @@ public class BlockVoidDecay extends Block
 		    	int i = x + dir.offsetX;
 		    	int j = y + dir.offsetY;
 		    	int k = z + dir.offsetZ;
-		    	
-		    	if(!world.getChunkProvider().chunkExists(i >> 4, k >> 4) || !world.getChunkFromBlockCoords(i, k).isChunkLoaded)
-		    	{
-		    		continue;
-		    	}
 		    	
 		    	Block block = world.getBlock(i, j, k);
 		    	
@@ -98,6 +101,10 @@ public class BlockVoidDecay extends Block
      */
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
     {
+    	if(VD_Settings.fastDecay)
+    	{
+    		world.scheduleBlockUpdate(x, y, z, this, 20);
+    	}
     }
 
     /**

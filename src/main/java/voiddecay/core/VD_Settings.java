@@ -8,4 +8,5 @@ public class VD_Settings
 	public static int decaySpeed = 100;
 	public static int infectedChunks = 100;
 	public static int decayCap = 20;
+	public static boolean fastDecay = false;
 }
