@@ -1,7 +1,7 @@
 package voiddecay.handlers;
 
-import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
+import voiddecay.WorldGenDecay;
 import voiddecay.blocks.BlockVoidDecay;
 import voiddecay.core.VD_Settings;
 import voiddecay.core.VoidDecay;
@@ -30,7 +30,7 @@ public class EventHandler
 			int k = event.chunkZ * 16 + event.rand.nextInt(16);
 			int height = event.world.getHeightValue(i, k);
 			
-			WorldGenMinable voidGen = new WorldGenMinable(VoidDecay.decay, 8);
+			WorldGenDecay voidGen = new WorldGenDecay(8);
 			voidGen.generate(event.world, event.rand, i, event.rand.nextInt(height > 1? height : 64), k);
 		}
 	}
