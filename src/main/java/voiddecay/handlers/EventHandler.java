@@ -1,5 +1,10 @@
 package voiddecay.handlers;
 
+import com.jcraft.jorbis.Block;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import voiddecay.WorldGenDecay;
 import voiddecay.blocks.BlockVoidDecay;
@@ -30,7 +35,17 @@ public class EventHandler
 			int k = event.chunkZ * 16 + event.rand.nextInt(16);
 			int height = event.world.getHeightValue(i, k);
 			
-			WorldGenDecay voidGen = new WorldGenDecay(8);
+			int minDecay = 8; // sets min number of blocks for decay
+			int dayDivBy = 10; // +1 for each dayDivBy
+			int chunkDivBy = 10; // +1 for each chunkDivBy
+			
+			// Distance from center of world +1 for every 'chunkDivBy' chunks away.
+			int distModifier = Math.max((Math.max(Math.abs(event.chunkX), Math.abs(event.chunkZ))/chunkDivBy), minDecay);
+			// For every 'dayDivBy' days add +1 (grabs world time) 
+			int timeModifier = Math.max((MathHelper.floor_double(event.world.getWorldTime()/24000L)/dayDivBy)*1, 0);
+			
+			WorldGenDecay voidGen = new WorldGenDecay(distModifier + timeModifier);
+
 			voidGen.generate(event.world, event.rand, i, event.rand.nextInt(height > 1? height : 64), k);
 		}
 	}
