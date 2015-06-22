@@ -23,7 +23,9 @@ public class ConfigHandler
 		VD_Settings.infectedChunks = config.getInt("Infected Chunks", Configuration.CATEGORY_GENERAL, 100, 0, 100, "What percentage of chunks are pre-infected");
 		VD_Settings.decayCap = config.getInt("Decay Cap", Configuration.CATEGORY_GENERAL, 20, 1, Integer.MAX_VALUE, "Maximum amount of blocks that can decay per second");
 		VD_Settings.fastDecay = config.getBoolean("Fast Decay", Configuration.CATEGORY_GENERAL, false, "Speeds up decay considerably at the cost of TPS latency (NOT RECOMMENDED)");
-		VD_Settings.decayProgression = config.getBoolean("Decay World Progression", Configuration.CATEGORY_GENERAL, true, "Void decay increases with world time and distance traveled from center of the world.");
+		VD_Settings.decayScaleTime = config.getBoolean("Scale With Time", Configuration.CATEGORY_GENERAL, false, "Decay scales with world time");
+		VD_Settings.decayScaleDist = config.getBoolean("Scale With Distance", Configuration.CATEGORY_GENERAL, false, "Decay scales with distance from spawn");
+		VD_Settings.hideUpdates = config.getBoolean("Hide Updates", Configuration.CATEGORY_GENERAL, false, "Hides update notifications");
 		
 		config.save();
 		

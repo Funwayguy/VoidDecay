@@ -146,7 +146,7 @@ public class CleanseExplosion extends Explosion
                     double d11 = (1.0D - d4) * d10;
                     if(entity instanceof EntityLivingBase)
                     {
-                    	((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 120, 1));
+                    	((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 600, 1));
                     }
                     double d8 = EnchantmentProtection.func_92092_a(entity, d11);
                     entity.motionX += d5 * d8;

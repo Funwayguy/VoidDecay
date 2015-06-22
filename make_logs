@@ -3,11 +3,11 @@
 ##############################################################################
 ##
 ##  Changelog creation script for use with Git Shell & Drone.io
-##  Created by Funwayguy for VoidDecay
+##  Created by Funwayguy for Void Decay
 ##
 ##############################################################################
 
 # Create document for update notice
 echo $ver_num > version.txt
-echo "https://drone.io/github.com/Funwayguy/VoidDecay/files" >> version.txt
+echo "http://minecraft.curseforge.com/mc-mods/231876-void-decay" >> version.txt
 git log -1 --pretty=format:"%B" >> version.txt

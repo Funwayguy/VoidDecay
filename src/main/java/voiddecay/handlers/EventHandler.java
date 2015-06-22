@@ -1,9 +1,6 @@
 package voiddecay.handlers;
 
-import com.jcraft.jorbis.Block;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.init.Blocks;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import voiddecay.WorldGenDecay;
@@ -37,17 +34,30 @@ public class EventHandler
 			
 			int minDecay = 8; // sets min number of blocks per generation
 			int maxDecay = 110; // Sets max number of blocks per generation
-			int dayDivBy = 10; // +1 for each 'dayDivBy'
-			int chunkDivBy = 10; // +1 for each 'chunkDivBy'
+			int decayDiff = maxDecay - minDecay;
+			
+			double daysTillMax = 30D; // days till maximum decay
+			double distTillMax = 500D; // distance in chunks till maximum decay
+			
+			double scaleFactor = 0D;
+			
+			if(VD_Settings.decayScaleDist)
+			{
+				ChunkCoordinates spawn = event.world.getSpawnPoint();
+				double spawnDist = Math.sqrt((i*i - spawn.posX*spawn.posX) + (k*k - spawn.posZ*spawn.posZ));
+				double distFactor = spawnDist/(distTillMax * 16D);
+				scaleFactor += distFactor;
+			}
+			
+			if(VD_Settings.decayScaleTime)
+			{
+				double timeFactor = (event.world.getWorldTime()/24000D)/daysTillMax;
+				scaleFactor += timeFactor;
+			}
+			
+			scaleFactor = MathHelper.clamp_double(scaleFactor, 0D, 1D);
 
-			// Distance from center of world +1 for every 'chunkDivBy' chunks away.
-			int distModifier = (Math.max(Math.abs(event.chunkX), Math.abs(event.chunkZ))/chunkDivBy);
-			// For every 'dayDivBy' days add +1 (grabs world time) 
-			int timeModifier = Math.max((MathHelper.floor_double(event.world.getWorldTime()/24000L)/dayDivBy)*1, 0);
-			// get number of blocks get min and max or just min if void progression false
-			int numberofblocks = VD_Settings.decayProgression ? Math.max(Math.min((distModifier + timeModifier), maxDecay), minDecay) : minDecay;
-
-			WorldGenDecay voidGen = new WorldGenDecay(numberofblocks);
+			WorldGenDecay voidGen = new WorldGenDecay(minDecay + MathHelper.floor_double(decayDiff * scaleFactor));
 
 			voidGen.generate(event.world, event.rand, i, event.rand.nextInt(height > 1? height : 64), k);
 		}

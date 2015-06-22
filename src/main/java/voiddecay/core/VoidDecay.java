@@ -11,11 +11,8 @@ import voiddecay.blocks.BlockVoidDecay;
 import voiddecay.blocks.BlockVoidTNT;
 import voiddecay.blocks.EntityCleanseTNT;
 import voiddecay.blocks.EntityVoidTNT;
-import voiddecay.blocks.RenderCleanseTNT;
-import voiddecay.blocks.RenderVoidTNT;
 import voiddecay.core.proxies.CommonProxy;
 import voiddecay.handlers.ConfigHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -71,20 +68,15 @@ public class VoidDecay
     	GameRegistry.registerBlock(cleanseTNT, "cleanse_tnt");
     	
     	GameRegistry.addShapedRecipe(new ItemStack(voidTNT), "TST", "SNS", "TST", 'T', new ItemStack(Blocks.tnt), 'S', new ItemStack(Items.skull, 1, 1), 'N', new ItemStack(Items.nether_star));
-    	GameRegistry.addShapedRecipe(new ItemStack(cleanseTNT), "TST", "SNS", "TST", 'T', new ItemStack(Blocks.tnt), 'S', new ItemStack(Items.potionitem, 1, 8229), 'N', new ItemStack(Items.nether_star));
+    	GameRegistry.addShapedRecipe(new ItemStack(cleanseTNT), "TST", "SNS", "TST", 'T', new ItemStack(Blocks.tnt), 'S', new ItemStack(Items.potionitem, 1, 8229), 'N', new ItemStack(Items.golden_apple, 1, 1));
     	
     	int vTntID = EntityRegistry.findGlobalUniqueEntityId();
     	EntityRegistry.registerGlobalEntityID(EntityVoidTNT.class, "void_tnt", vTntID);
     	EntityRegistry.registerModEntity(EntityVoidTNT.class, "void_tnt", vTntID, this, 64, 10, true);
+    	
     	int cTntID = EntityRegistry.findGlobalUniqueEntityId();
     	EntityRegistry.registerGlobalEntityID(EntityCleanseTNT.class, "cleanse_tnt", cTntID);
     	EntityRegistry.registerModEntity(EntityCleanseTNT.class, "cleanse_tnt", cTntID, this, 64, 10, true);
-    	
-    	if(proxy.isClient())
-    	{
-    		RenderingRegistry.registerEntityRenderingHandler(EntityVoidTNT.class, new RenderVoidTNT());
-    		RenderingRegistry.registerEntityRenderingHandler(EntityCleanseTNT.class, new RenderCleanseTNT());
-    	}
     }
     
     @EventHandler

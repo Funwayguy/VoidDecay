@@ -1,6 +1,7 @@
 package voiddecay.core.proxies;
 
 import net.minecraftforge.common.MinecraftForge;
+import voiddecay.client.UpdateNotification;
 import voiddecay.handlers.EventHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 
@@ -16,5 +17,6 @@ public class CommonProxy
 		EventHandler handler = new EventHandler();
 		MinecraftForge.EVENT_BUS.register(handler);
 		FMLCommonHandler.instance().bus().register(handler);
+		FMLCommonHandler.instance().bus().register(new UpdateNotification());
 	}
 }
