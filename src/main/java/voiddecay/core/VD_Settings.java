@@ -12,4 +12,6 @@ public class VD_Settings
 	public static boolean fastDecay = false;
 	public static boolean decayScaleTime = false;
 	public static boolean decayScaleDist = false;
+	public static int relativeDist = 100;
+	public static int relativeTime = 30;
 }

@@ -25,6 +25,8 @@ public class ConfigHandler
 		VD_Settings.fastDecay = config.getBoolean("Fast Decay", Configuration.CATEGORY_GENERAL, false, "Speeds up decay considerably at the cost of TPS latency (NOT RECOMMENDED)");
 		VD_Settings.decayScaleTime = config.getBoolean("Scale With Time", Configuration.CATEGORY_GENERAL, false, "Decay scales with world time");
 		VD_Settings.decayScaleDist = config.getBoolean("Scale With Distance", Configuration.CATEGORY_GENERAL, false, "Decay scales with distance from spawn");
+		VD_Settings.relativeDist = config.getInt("Distance in chunks for scaling", Configuration.CATEGORY_GENERAL, 100, 1, Integer.MAX_VALUE, "");
+		VD_Settings.relativeTime = config.getInt("Time in days for scaling", Configuration.CATEGORY_GENERAL, 30, 1, Integer.MAX_VALUE, "");
 		VD_Settings.hideUpdates = config.getBoolean("Hide Updates", Configuration.CATEGORY_GENERAL, false, "Hides update notifications");
 		
 		config.save();

@@ -36,8 +36,8 @@ public class EventHandler
 			int maxDecay = 110; // Sets max number of blocks per generation
 			int decayDiff = maxDecay - minDecay;
 			
-			double daysTillMax = 30D; // days till maximum decay
-			double distTillMax = 500D; // distance in chunks till maximum decay
+			double daysTillMax = VD_Settings.relativeTime; // days till maximum decay
+			double distTillMax = VD_Settings.relativeDist; // distance in chunks till maximum decay
 			
 			double scaleFactor = 0D;
 			
