@@ -28,6 +28,7 @@ public class ConfigHandler
 		VD_Settings.relativeDist = config.getInt("Distance in chunks for scaling", Configuration.CATEGORY_GENERAL, 100, 1, Integer.MAX_VALUE, "");
 		VD_Settings.relativeTime = config.getInt("Time in days for scaling", Configuration.CATEGORY_GENERAL, 30, 1, Integer.MAX_VALUE, "");
 		VD_Settings.hideUpdates = config.getBoolean("Hide Updates", Configuration.CATEGORY_GENERAL, false, "Hides update notifications");
+		VD_Settings.voidMeteor = config.getBoolean("Void Meteors", Configuration.CATEGORY_GENERAL, true, "Occasionally void causing fireballs will drop from the sky");
 		
 		config.save();
 		

@@ -1,8 +1,12 @@
 package voiddecay.handlers;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
+import voiddecay.EntityVoidFireball;
 import voiddecay.WorldGenDecay;
 import voiddecay.blocks.BlockVoidDecay;
 import voiddecay.core.VD_Settings;
@@ -79,6 +83,22 @@ public class EventHandler
 		{
 			ticks=0;
 			BlockVoidDecay.updates = 0;
+		}
+	}
+	
+	@SubscribeEvent
+	public void onLivingUpdate(LivingUpdateEvent event)
+	{
+		if(!event.entityLiving.worldObj.isRemote && event.entityLiving.worldObj.isRaining() && event.entityLiving.worldObj.isThundering())
+		{
+			if(VD_Settings.voidMeteor && event.entityLiving.worldObj.rand.nextInt(100) == 0 && !event.entityLiving.worldObj.provider.hasNoSky && event.entityLiving.ticksExisted%200 == 0 && event.entityLiving instanceof EntityPlayer)
+			{
+				double spawnX = event.entityLiving.posX + (event.entityLiving.worldObj.rand.nextDouble() * 128D) - 64D;
+				double spawnZ = event.entityLiving.posZ + (event.entityLiving.worldObj.rand.nextDouble() * 128D) - 64D;
+				
+				EntityFireball fireball = new EntityVoidFireball(event.entityLiving.worldObj, spawnX, 255, spawnZ, 0.1D, -2D, 0.1D);
+				event.entityLiving.worldObj.spawnEntityInWorld(fireball);
+			}
 		}
 	}
 }

@@ -6,6 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
+import voiddecay.EntityVoidFireball;
 import voiddecay.blocks.BlockCleanseTNT;
 import voiddecay.blocks.BlockVoidDecay;
 import voiddecay.blocks.BlockVoidTNT;
@@ -60,6 +61,8 @@ public class VoidDecay
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+    	EntityRegistry.registerModEntity(EntityVoidFireball.class, "void_fireball", EntityRegistry.findGlobalUniqueEntityId(), instance, 128, 15, true);
+    	
     	decay = new BlockVoidDecay();
     	voidTNT = new BlockVoidTNT();
     	cleanseTNT = new BlockCleanseTNT();

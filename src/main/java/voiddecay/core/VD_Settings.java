@@ -14,4 +14,5 @@ public class VD_Settings
 	public static boolean decayScaleDist = false;
 	public static int relativeDist = 100;
 	public static int relativeTime = 30;
+	public static boolean voidMeteor = true;
 }

@@ -26,9 +26,8 @@ public class BlockVoidDecay extends Block
 		super(Material.portal);
 		this.setBlockUnbreakable();
 		this.setCreativeTab(CreativeTabs.tabMisc);
-		this.setBlockTextureName("portal");
+		this.setBlockTextureName("voiddecay:void");
 		this.setTickRandomly(true);
-    	this.setLightLevel(1F);
     	this.setBlockName("void_decay.decay");
 	}
 
@@ -60,8 +59,6 @@ public class BlockVoidDecay extends Block
     	{
     		updates++;
     	}
-    	
-    	this.setLightLevel(1F);
     	
     	Block below = world.getBlock(x, y - 1, z);
     	
@@ -130,7 +127,7 @@ public class BlockVoidDecay extends Block
      */
     public boolean renderAsNormalBlock()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -198,7 +195,8 @@ public class BlockVoidDecay extends Block
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockAccess access, int x, int y, int z, int p_149646_5_)
     {
-        if (access.getBlock(x, y, z) == this || access.getBlock(x, y, z).isOpaqueCube())
+    	Block b = access.getBlock(x, y, z);
+        if (b == this || b.isOpaqueCube())
         {
         	return false;
         } else
