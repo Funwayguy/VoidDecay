@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
 import voiddecay.EntityVoidFireball;
+import voiddecay.WorldGenDecay;
 import voiddecay.blocks.BlockCleanseTNT;
 import voiddecay.blocks.BlockVoidDecay;
 import voiddecay.blocks.BlockVoidTNT;
@@ -80,6 +81,8 @@ public class VoidDecay
     	int cTntID = EntityRegistry.findGlobalUniqueEntityId();
     	EntityRegistry.registerGlobalEntityID(EntityCleanseTNT.class, "cleanse_tnt", cTntID);
     	EntityRegistry.registerModEntity(EntityCleanseTNT.class, "cleanse_tnt", cTntID, this, 64, 10, true);
+    	
+    	GameRegistry.registerWorldGenerator(new WorldGenDecay(), 0);
     }
     
     @EventHandler
