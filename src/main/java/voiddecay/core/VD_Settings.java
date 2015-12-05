@@ -15,4 +15,5 @@ public class VD_Settings
 	public static int relativeDist = 100;
 	public static int relativeTime = 30;
 	public static boolean voidMeteor = true;
+	public static boolean fastRender = false;
 }

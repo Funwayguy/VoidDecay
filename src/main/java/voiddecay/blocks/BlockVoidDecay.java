@@ -38,8 +38,29 @@ public class BlockVoidDecay extends Block
     {
     	if(VD_Settings.fastDecay)
     	{
-    		world.scheduleBlockUpdate(x, y, z, this, 20);
+    		world.scheduleBlockUpdate(x, y, z, this, this.tickRate(world));
     	}
+    }
+
+    /**
+     * How many world ticks before ticking
+     */
+    @Override
+    public int tickRate(World world)
+    {
+        return 60;
+    }
+    
+    Random rand = new Random();
+    
+    /**
+     * Returns whether or not this block is of a type that needs random ticking. Called for ref-counting purposes by
+     * ExtendedBlockStorage in order to broadly cull a chunk from the random chunk update list for efficiency's sake.
+     */
+    @Override
+    public boolean getTickRandomly()
+    {
+        return this.needsRandomTick && rand.nextInt(2) == 0;
     }
 	
     /**
@@ -60,6 +81,8 @@ public class BlockVoidDecay extends Block
     		updates++;
     	}
     	
+    	System.out.println("Ticking...");
+    	
     	Block below = world.getBlock(x, y - 1, z);
     	
     	if(below.getMaterial() != Material.air && below != this)
@@ -68,7 +91,7 @@ public class BlockVoidDecay extends Block
     		world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "portal.portal", 0.25F, 1.8F + (rand.nextFloat()*0.2F));
     		if(VD_Settings.fastDecay)
     		{
-    			world.scheduleBlockUpdate(x, y, z, this, 20);
+    			world.scheduleBlockUpdate(x, y, z, this, this.tickRate(world));
     		}
     		return;
     	} else
@@ -100,7 +123,7 @@ public class BlockVoidDecay extends Block
     {
     	if(VD_Settings.fastDecay)
     	{
-    		world.scheduleBlockUpdate(x, y, z, this, 20);
+    		world.scheduleBlockUpdate(x, y, z, this, this.tickRate(world));
     	}
     }
 
@@ -119,7 +142,7 @@ public class BlockVoidDecay extends Block
     @SideOnly(Side.CLIENT)
     public int getRenderBlockPass()
     {
-        return 1;
+        return VD_Settings.fastRender? 0 : 1;
     }
 
     /**
@@ -136,7 +159,7 @@ public class BlockVoidDecay extends Block
      */
     public boolean isOpaqueCube()
     {
-        return false;
+        return VD_Settings.fastRender;
     }
 
     /**
