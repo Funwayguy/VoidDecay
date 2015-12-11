@@ -1,5 +1,7 @@
 package voiddecay.handlers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Level;
 import voiddecay.core.VD_Settings;
@@ -30,9 +32,10 @@ public class ConfigHandler
 		VD_Settings.hideUpdates = config.getBoolean("Hide Updates", Configuration.CATEGORY_GENERAL, false, "Hides update notifications");
 		VD_Settings.voidMeteor = config.getBoolean("Void Meteors", Configuration.CATEGORY_GENERAL, true, "Occasionally void causing fireballs will drop from the sky");
 		VD_Settings.fastRender = config.getBoolean("Fast Render", Configuration.CATEGORY_GENERAL, false, "Disable transparency rendering in favour of more FPS");
+		VD_Settings.blacklist = (ArrayList<String>)Arrays.asList(config.getStringList("Decay Blacklist", Configuration.CATEGORY_GENERAL, new String[0], "Blocks blacklisted from being eaten by decay"));
 		
 		config.save();
 		
-		System.out.println("Loaded configs...");
+		VoidDecay.logger.log(Level.INFO, "Loaded configs...");
 	}
 }

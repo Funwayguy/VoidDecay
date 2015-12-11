@@ -1,5 +1,7 @@
 package voiddecay.core;
 
+import java.util.ArrayList;
+
 /**
  * A container for all the configurable settings in the mod
  */
@@ -16,4 +18,5 @@ public class VD_Settings
 	public static int relativeTime = 30;
 	public static boolean voidMeteor = true;
 	public static boolean fastRender = false;
+	public static ArrayList<String> blacklist = new ArrayList<String>();
 }

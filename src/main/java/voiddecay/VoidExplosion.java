@@ -19,6 +19,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import voiddecay.core.VD_Settings;
 import voiddecay.core.VoidDecay;
 
 public class VoidExplosion extends Explosion
@@ -190,7 +191,7 @@ public class VoidExplosion extends Explosion
             k = chunkposition.chunkPosZ;
             block = this.worldObj.getBlock(i, j, k);
 
-            if (block.getMaterial() != Material.air)
+            if (block.getMaterial() != Material.air && !VD_Settings.blacklist.contains(Block.blockRegistry.getNameForObject(block)))
             {
                 this.worldObj.setBlock(i, j, k, VoidDecay.decay, 0, 2);
             }

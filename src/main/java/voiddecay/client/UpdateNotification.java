@@ -3,6 +3,7 @@ package voiddecay.client;
 import java.io.BufferedInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import org.apache.logging.log4j.Level;
 import voiddecay.core.VD_Settings;
 import voiddecay.core.VoidDecay;
 import net.minecraft.util.ChatComponentText;
@@ -129,7 +130,7 @@ public class UpdateNotification
 		int responseCode = con.getResponseCode();
 		if(responseCode != HttpURLConnection.HTTP_OK && responseCode != HttpURLConnection.HTTP_MOVED_PERM)
 		{
-			System.out.println("Update request returned response code: " + responseCode + " " + con.getResponseMessage());
+			VoidDecay.logger.log(Level.ERROR, "Update request returned response code: " + responseCode + " " + con.getResponseMessage());
 		} else if(responseCode == HttpURLConnection.HTTP_MOVED_PERM)
 		{
 			if(doRedirect)
