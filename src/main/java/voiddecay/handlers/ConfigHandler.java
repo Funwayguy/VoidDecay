@@ -32,7 +32,14 @@ public class ConfigHandler
 		VD_Settings.hideUpdates = config.getBoolean("Hide Updates", Configuration.CATEGORY_GENERAL, false, "Hides update notifications");
 		VD_Settings.voidMeteor = config.getBoolean("Void Meteors", Configuration.CATEGORY_GENERAL, true, "Occasionally void causing fireballs will drop from the sky");
 		VD_Settings.fastRender = config.getBoolean("Fast Render", Configuration.CATEGORY_GENERAL, false, "Disable transparency rendering in favour of more FPS");
-		VD_Settings.blacklist = new ArrayList<String>(Arrays.asList(config.getStringList("Decay Blacklist", Configuration.CATEGORY_GENERAL, new String[0], "Blocks blacklisted from being eaten by decay")));
+		VD_Settings.dimWhitelist = config.getBoolean("Dimension Whitelist", Configuration.CATEGORY_GENERAL, false, "Use the dimension blacklist as a whitelist instead");
+		VD_Settings.blockBlacklist = new ArrayList<String>(Arrays.asList(config.getStringList("Decay Blacklist", Configuration.CATEGORY_GENERAL, new String[0], "Blocks blacklisted from being eaten by decay")));
+		VD_Settings.dimBlacklist = new ArrayList<Integer>();
+		
+		for(int i : config.get(Configuration.CATEGORY_GENERAL, "Dimension Blacklist", new int[0], "Dimensions decay will not spawn in").getIntList())
+		{
+			VD_Settings.dimBlacklist.add(i);
+		}
 		
 		config.save();
 		

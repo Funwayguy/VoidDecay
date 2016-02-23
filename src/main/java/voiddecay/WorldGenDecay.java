@@ -15,7 +15,7 @@ public class WorldGenDecay implements IWorldGenerator
 	@Override
 	public void generate(Random rand, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
-		if(rand.nextInt(100) >= VD_Settings.infectedChunks)
+		if(VD_Settings.dimBlacklist.contains(world.provider.dimensionId) != VD_Settings.dimWhitelist || rand.nextInt(100) >= VD_Settings.infectedChunks)
 		{
 			return;
 		}

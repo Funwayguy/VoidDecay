@@ -191,7 +191,7 @@ public class VoidExplosion extends Explosion
             k = chunkposition.chunkPosZ;
             block = this.worldObj.getBlock(i, j, k);
 
-            if (block.getMaterial() != Material.air && !VD_Settings.blacklist.contains(Block.blockRegistry.getNameForObject(block)))
+            if (block.getMaterial() != Material.air && !VD_Settings.blockBlacklist.contains(Block.blockRegistry.getNameForObject(block)))
             {
                 this.worldObj.setBlock(i, j, k, VoidDecay.decay, 0, 2);
             }

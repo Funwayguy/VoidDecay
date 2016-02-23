@@ -83,7 +83,7 @@ public class BlockVoidDecay extends Block
     	
     	Block below = world.getBlock(x, y - 1, z);
     	
-    	if(below.getMaterial() != Material.air && below != this && !VD_Settings.blacklist.contains(Block.blockRegistry.getNameForObject(below)))
+    	if(below.getMaterial() != Material.air && below != this && !VD_Settings.blockBlacklist.contains(Block.blockRegistry.getNameForObject(below)))
     	{
     		world.setBlock(x, y - 1, z, this, 0, 2);
     		world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "portal.portal", 0.25F, 1.8F + (rand.nextFloat()*0.2F));
@@ -102,7 +102,7 @@ public class BlockVoidDecay extends Block
 		    	
 		    	Block block = world.getBlock(i, j, k);
 		    	
-		    	if(block.getMaterial() != Material.air && block != this && !VD_Settings.blacklist.contains(Block.blockRegistry.getNameForObject(block)))
+		    	if(block.getMaterial() != Material.air && block != this && !VD_Settings.blockBlacklist.contains(Block.blockRegistry.getNameForObject(block)))
 		    	{
 		    		world.setBlock(i, j, k, this, 0, 2);
 		    	}
