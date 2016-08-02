@@ -62,7 +62,7 @@ public class VoidDecay
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-    	EntityRegistry.registerModEntity(EntityVoidFireball.class, "void_fireball", EntityRegistry.findGlobalUniqueEntityId(), instance, 128, 15, true);
+    	EntityRegistry.registerModEntity(EntityVoidFireball.class, "void_fireball", 0, this, 128, 15, true);
     	
     	decay = new BlockVoidDecay();
     	voidTNT = new BlockVoidTNT();
@@ -74,13 +74,9 @@ public class VoidDecay
     	GameRegistry.addShapedRecipe(new ItemStack(voidTNT), "TST", "SNS", "TST", 'T', new ItemStack(Blocks.tnt), 'S', new ItemStack(Items.skull, 1, 1), 'N', new ItemStack(Items.nether_star));
     	GameRegistry.addShapedRecipe(new ItemStack(cleanseTNT), "TST", "SNS", "TST", 'T', new ItemStack(Blocks.tnt), 'S', new ItemStack(Items.potionitem, 1, 8229), 'N', new ItemStack(Items.golden_apple, 1, 1));
     	
-    	int vTntID = EntityRegistry.findGlobalUniqueEntityId();
-    	EntityRegistry.registerGlobalEntityID(EntityVoidTNT.class, "void_tnt", vTntID);
-    	EntityRegistry.registerModEntity(EntityVoidTNT.class, "void_tnt", vTntID, this, 64, 10, true);
+    	EntityRegistry.registerModEntity(EntityVoidTNT.class, "void_tnt", 1, this, 64, 10, true);
     	
-    	int cTntID = EntityRegistry.findGlobalUniqueEntityId();
-    	EntityRegistry.registerGlobalEntityID(EntityCleanseTNT.class, "cleanse_tnt", cTntID);
-    	EntityRegistry.registerModEntity(EntityCleanseTNT.class, "cleanse_tnt", cTntID, this, 64, 10, true);
+    	EntityRegistry.registerModEntity(EntityCleanseTNT.class, "cleanse_tnt", 2, this, 64, 10, true);
     	
     	GameRegistry.registerWorldGenerator(new WorldGenDecay(), 0);
     }
