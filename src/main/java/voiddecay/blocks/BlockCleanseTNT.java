@@ -1,8 +1,5 @@
 package voiddecay.blocks;
 
-import java.awt.Color;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -10,7 +7,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.world.Explosion;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockCleanseTNT extends Block
@@ -18,35 +14,10 @@ public class BlockCleanseTNT extends Block
 	public BlockCleanseTNT()
 	{
 		super(Material.tnt);
-		this.setBlockTextureName("portal");
+		this.setBlockTextureName("voiddecay:tnt_cleanse");
 		this.setBlockName("void_decay.cleanse_tnt");
 		this.setCreativeTab(CreativeTabs.tabRedstone);
 	}
-
-    @SideOnly(Side.CLIENT)
-    public int getBlockColor()
-    {
-        return Color.BLUE.getRGB();
-    }
-
-    /**
-     * Returns the color this block should be rendered. Used by leaves.
-     */
-    @SideOnly(Side.CLIENT)
-    public int getRenderColor(int p_149741_1_)
-    {
-        return Color.BLUE.getRGB();
-    }
-
-    /**
-     * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
-     * when first determining what to render.
-     */
-    @SideOnly(Side.CLIENT)
-    public int colorMultiplier(IBlockAccess p_149720_1_, int p_149720_2_, int p_149720_3_, int p_149720_4_)
-    {
-        return Color.BLUE.getRGB();
-    }
 
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
